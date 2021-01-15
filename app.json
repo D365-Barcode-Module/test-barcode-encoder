@@ -1,0 +1,56 @@
+{
+  "id": "3d5c54e8-28b6-42fc-b2fd-98af7983a9c1",
+  "name": "es2BarcodeEncoderTest",
+  "publisher": "Default publisher",
+  "version": "17.3.0.0",
+  "brief": "Tests the D365 Business Central Sales and Marketing functionality",
+  "description": "Improving and extending your D365 Business Central Sales and Marketing functionality",
+  "privacyStatement": "https://www.easystep2.nl//en/privacy_verklaring/",
+  "EULA": "https://www.easystep2.nl/en/eula-dynamics365-business-central-extensions/",
+  "help": "https://www.easystep2.nl/en/support/",
+  "url": "https://www.easystep2.nl/en/dynamics-365-business-central/",
+  "logo": "./Resources/img/sales-and-marketing.png",
+  "dependencies": [
+    {
+      "id": "b70cdbee-da69-4029-bafe-be2a1977301c",
+      "name": "System Barcode Encoder",
+      "publisher": "Easystep2 BV, The Netherlands",
+      "version": "17.0.0.1"
+    },
+    {
+      "id": "dd0be2ea-f733-4d65-bb34-a28f4624fb14",
+      "publisher": "Microsoft",
+      "name": "Library Assert",
+      "version": "17.0.0.0"
+    },
+    {
+      "id": "e7320ebb-08b3-4406-b1ec-b4927d3e280b",
+      "publisher": "Microsoft",
+      "name": "Any",
+      "version": "17.0.0.0"
+    },
+    {
+      "id": "9856ae4f-d1a7-46ef-89bb-6ef056398228",
+      "publisher": "Microsoft",
+      "name": "System Application Test Library",
+      "version": "17.0.0.0"
+    },
+    {
+      "id": "5d86850b-0d76-4eca-bd7b-951ad998e997",
+      "publisher": "Microsoft",
+       "name": "Tests-TestLibraries",
+       "version": "17.0.0.0"
+    }
+  ],
+  "idRanges": [{
+    "from": 50151,
+    "to": 50200
+  }],
+  "features": ["TranslationFile", "GenerateCaptions"],
+  "screenshots": [],
+  "platform": "17.0.0.0",
+  "application": "17.3.0.0",
+  "contextSensitiveHelpUrl": "https://es2ProjectManufacturingTest.com/help/",
+  "showMyCode": true,
+  "runtime": "6.0"
+}
