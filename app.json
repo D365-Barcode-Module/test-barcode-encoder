@@ -13,9 +13,9 @@
   "dependencies": [
     {
       "id": "b70cdbee-da69-4029-bafe-be2a1977301c",
-      "name": "System Barcode Encoder",
-      "publisher": "Easystep2 BV, The Netherlands",
-      "version": "17.0.0.1"
+      "name": "Barcode Encoder",
+      "publisher": "Microsoft",
+      "version": "17.3.0.0"
     },
     {
       "id": "dd0be2ea-f733-4d65-bb34-a28f4624fb14",

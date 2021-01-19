@@ -9,7 +9,7 @@ codeunit 50154 Code128Test
     [Test]
     procedure TestCode128aEncoding();
     var
-        TempBarcodeParameters: record BarcodeParameters temporary;
+        TempBarcodeParameters: record "Barcode Parameters" temporary;
         EncodedText: text;
         ExpectedResult: text;
 
@@ -33,7 +33,7 @@ codeunit 50154 Code128Test
     [Test]
     procedure TestCode128bEncoding();
     var
-        TempBarcodeParameters: record BarcodeParameters temporary;
+        TempBarcodeParameters: record "Barcode Parameters" temporary;
         EncodedText: text;
         ExpectedResult: text;
 
@@ -57,7 +57,7 @@ codeunit 50154 Code128Test
     [Test]
     procedure TestCode128cEncoding();
     var
-        TempBarcodeParameters: record BarcodeParameters temporary;
+        TempBarcodeParameters: record "Barcode Parameters" temporary;
         EncodedText: text;
         ExpectedResult: text;
 
@@ -81,7 +81,7 @@ codeunit 50154 Code128Test
     [Test]
     procedure TestCode128EncodingWithNoTypeSelected();
     var
-        TempBarcodeParameters: record BarcodeParameters temporary;
+        TempBarcodeParameters: record "Barcode Parameters" temporary;
         EncodedText: text;
         ExpectedResult: text;
 
@@ -105,7 +105,7 @@ codeunit 50154 Code128Test
     [Test]
     procedure TestCode128ValidationWithEmptyString();
     var
-        TempBarcodeParameters: record BarcodeParameters temporary;
+        TempBarcodeParameters: record "Barcode Parameters" temporary;
         DidValidationSucceed: Boolean;
         ExpectedErrorText: Text;
 
@@ -128,7 +128,7 @@ codeunit 50154 Code128Test
     [Test]
     procedure TestCode128ValidationWithNullString();
     var
-        TempBarcodeParameters: record BarcodeParameters temporary;
+        TempBarcodeParameters: record "Barcode Parameters" temporary;
         DidValidationSucceed: Boolean;
         ExpectedErrorText: Text;
 
@@ -150,7 +150,7 @@ codeunit 50154 Code128Test
     [Test]
     procedure TestCode128aValidationWithNormalString();
     var
-        TempBarcodeParameters: record BarcodeParameters temporary;
+        TempBarcodeParameters: record "Barcode Parameters" temporary;
         DidValidationSucceed: Boolean;
         ExpectedResult: Boolean;
 
@@ -175,7 +175,7 @@ codeunit 50154 Code128Test
     [Test]
     procedure TestCode128aValidationWithInvalidString();
     var
-        TempBarcodeParameters: record BarcodeParameters temporary;
+        TempBarcodeParameters: record "Barcode Parameters" temporary;
         DidValidationSucceed: Boolean;
         ExpectedErrorText: Text;
 
@@ -199,7 +199,7 @@ codeunit 50154 Code128Test
     [Test]
     procedure TestCode128bValidationWithInvalidString();
     var
-        TempBarcodeParameters: record BarcodeParameters temporary;
+        TempBarcodeParameters: record "Barcode Parameters" temporary;
         DidValidationSucceed: Boolean;
         ExpectedErrorText: Text;
 
@@ -223,7 +223,7 @@ codeunit 50154 Code128Test
     [Test]
     procedure TestCode128cValidationWithInvalidString();
     var
-        TempBarcodeParameters: record BarcodeParameters temporary;
+        TempBarcodeParameters: record "Barcode Parameters" temporary;
         DidValidationSucceed: Boolean;
         ExpectedErrorText: Text;
 
@@ -244,7 +244,29 @@ codeunit 50154 Code128Test
 
     end;
 
-    procedure InitializeEncoder(var TempBarcodeParameters: record BarcodeParameters temporary);
+    [Test]
+    procedure TestCode128ImageEncodingNotImplemented();
+    var
+        TempBarcodeParameters: record "Barcode Parameters" temporary;
+        ImageText: Text;
+        ExpectedErrorText: Text;
+
+    begin
+        // [Scenario] A barcode string needs to be validated for Code128
+        // [Given] A font encoder initialized for Code128
+
+        InitializeEncoder(TempBarcodeParameters);
+
+        // [When] An the image encoder is called
+
+        // [Then] The call should raise an error
+        ExpectedErrorText := 'Base64 Image Encoding is currently not implemented for ProviderDefault Provider and Symbology Code-128';
+        asserterror ImageText := TempBarcodeParameters.EncodeBarcodeImage();
+        Assert.AreEqual(ExpectedErrorText, GetLastErrorText(), 'The operation did not raise the correct error');
+
+    end;
+
+    procedure InitializeEncoder(var TempBarcodeParameters: record "Barcode Parameters" temporary);
     var
 
     begin

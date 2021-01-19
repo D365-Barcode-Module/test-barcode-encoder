@@ -9,7 +9,7 @@ codeunit 50156 EAN13Test
     [Test]
     procedure TestEAN13Encoding();
     var
-        TempBarcodeParameters: record BarcodeParameters temporary;
+        TempBarcodeParameters: record "Barcode Parameters" temporary;
         EncodedText: text;
         ExpectedResult: text;
 
@@ -32,7 +32,7 @@ codeunit 50156 EAN13Test
     [Test]
     procedure TestEAN13ValidationWithEmptyString();
     var
-        TempBarcodeParameters: record BarcodeParameters temporary;
+        TempBarcodeParameters: record "Barcode Parameters" temporary;
         DidValidationSucceed: Boolean;
         ExpectedErrorText: Text;
 
@@ -55,7 +55,7 @@ codeunit 50156 EAN13Test
     [Test]
     procedure TestEAN13ValidationWithNullString();
     var
-        TempBarcodeParameters: record BarcodeParameters temporary;
+        TempBarcodeParameters: record "Barcode Parameters" temporary;
         DidValidationSucceed: Boolean;
         ExpectedErrorText: Text;
 
@@ -77,7 +77,7 @@ codeunit 50156 EAN13Test
     [Test]
     procedure TestEAN13ValidationWithNormalString();
     var
-        TempBarcodeParameters: record BarcodeParameters temporary;
+        TempBarcodeParameters: record "Barcode Parameters" temporary;
         DidValidationSucceed: Boolean;
         ExpectedResult: Boolean;
         test: Integer;
@@ -104,7 +104,7 @@ codeunit 50156 EAN13Test
     [Test]
     procedure TestEAN13ValidationWithInvalidString();
     var
-        TempBarcodeParameters: record BarcodeParameters temporary;
+        TempBarcodeParameters: record "Barcode Parameters" temporary;
         DidValidationSucceed: Boolean;
         ExpectedErrorText: Text;
 
@@ -127,7 +127,7 @@ codeunit 50156 EAN13Test
     [Test]
     procedure TestEAN13ValidationWithInvalidStringLength();
     var
-        TempBarcodeParameters: record BarcodeParameters temporary;
+        TempBarcodeParameters: record "Barcode Parameters" temporary;
         DidValidationSucceed: Boolean;
         ExpectedErrorText: Text;
 
@@ -147,7 +147,29 @@ codeunit 50156 EAN13Test
 
     end;
 
-    procedure InitializeEncoder(var TempBarcodeParameters: record BarcodeParameters temporary);
+    [Test]
+    procedure TestEAN13ImageEncodingNotImplemented();
+    var
+        TempBarcodeParameters: record "Barcode Parameters" temporary;
+        ImageText: Text;
+        ExpectedErrorText: Text;
+
+    begin
+        // [Scenario] A barcode string needs to be validated for EAN13
+        // [Given] A font encoder initialized for EAN13
+
+        InitializeEncoder(TempBarcodeParameters);
+
+        // [When] An the image encoder is called
+
+        // [Then] The call should raise an error
+        ExpectedErrorText := 'Base64 Image Encoding is currently not implemented for ProviderDefault Provider and Symbology EAN-13';
+        asserterror ImageText := TempBarcodeParameters.EncodeBarcodeImage();
+        Assert.AreEqual(ExpectedErrorText, GetLastErrorText(), 'The operation did not raise the correct error');
+
+    end;
+
+    procedure InitializeEncoder(var TempBarcodeParameters: record "Barcode Parameters" temporary);
     var
 
     begin

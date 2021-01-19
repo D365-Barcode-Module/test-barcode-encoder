@@ -9,7 +9,7 @@ codeunit 50161 UPCETest
     [Test]
     procedure TestUPCEEncoding();
     var
-        TempBarcodeParameters: record BarcodeParameters temporary;
+        TempBarcodeParameters: record "Barcode Parameters" temporary;
         EncodedText: text;
         ExpectedResult: text;
 
@@ -32,7 +32,7 @@ codeunit 50161 UPCETest
     [Test]
     procedure TestUPCEValidationWithEmptyString();
     var
-        TempBarcodeParameters: record BarcodeParameters temporary;
+        TempBarcodeParameters: record "Barcode Parameters" temporary;
         DidValidationSucceed: Boolean;
         ExpectedErrorText: Text;
 
@@ -55,7 +55,7 @@ codeunit 50161 UPCETest
     [Test]
     procedure TestUPCEValidationWithNullString();
     var
-        TempBarcodeParameters: record BarcodeParameters temporary;
+        TempBarcodeParameters: record "Barcode Parameters" temporary;
         DidValidationSucceed: Boolean;
         ExpectedErrorText: Text;
 
@@ -77,7 +77,7 @@ codeunit 50161 UPCETest
     [Test]
     procedure TestUPCEValidationWithNormalString();
     var
-        TempBarcodeParameters: record BarcodeParameters temporary;
+        TempBarcodeParameters: record "Barcode Parameters" temporary;
         DidValidationSucceed: Boolean;
         ExpectedResult: Boolean;
         test: Integer;
@@ -104,7 +104,7 @@ codeunit 50161 UPCETest
     [Test]
     procedure TestUPCEValidationWithInvalidString();
     var
-        TempBarcodeParameters: record BarcodeParameters temporary;
+        TempBarcodeParameters: record "Barcode Parameters" temporary;
         DidValidationSucceed: Boolean;
         ExpectedErrorText: Text;
 
@@ -127,7 +127,7 @@ codeunit 50161 UPCETest
     [Test]
     procedure TestUPCEValidationWithInvalidStringLength();
     var
-        TempBarcodeParameters: record BarcodeParameters temporary;
+        TempBarcodeParameters: record "Barcode Parameters" temporary;
         DidValidationSucceed: Boolean;
         ExpectedErrorText: Text;
 
@@ -147,7 +147,29 @@ codeunit 50161 UPCETest
 
     end;
 
-    procedure InitializeEncoder(var TempBarcodeParameters: record BarcodeParameters temporary);
+    [Test]
+    procedure TestUPCEImageEncodingNotImplemented();
+    var
+        TempBarcodeParameters: record "Barcode Parameters" temporary;
+        ImageText: Text;
+        ExpectedErrorText: Text;
+
+    begin
+        // [Scenario] A barcode string needs to be validated for UPCE
+        // [Given] A font encoder initialized for UPCE
+
+        InitializeEncoder(TempBarcodeParameters);
+
+        // [When] An the image encoder is called
+
+        // [Then] The call should raise an error
+        ExpectedErrorText := 'Base64 Image Encoding is currently not implemented for ProviderDefault Provider and Symbology UPC-E';
+        asserterror ImageText := TempBarcodeParameters.EncodeBarcodeImage();
+        Assert.AreEqual(ExpectedErrorText, GetLastErrorText(), 'The operation did not raise the correct error');
+
+    end;
+
+    procedure InitializeEncoder(var TempBarcodeParameters: record "Barcode Parameters" temporary);
     var
 
     begin

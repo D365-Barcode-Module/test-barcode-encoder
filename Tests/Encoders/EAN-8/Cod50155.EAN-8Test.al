@@ -9,7 +9,7 @@ codeunit 50155 EAN8Test
     [Test]
     procedure TestEAN8Encoding();
     var
-        TempBarcodeParameters: record BarcodeParameters temporary;
+        TempBarcodeParameters: record "Barcode Parameters" temporary;
         EncodedText: text;
         ExpectedResult: text;
 
@@ -32,7 +32,7 @@ codeunit 50155 EAN8Test
     [Test]
     procedure TestEAN8ValidationWithEmptyString();
     var
-        TempBarcodeParameters: record BarcodeParameters temporary;
+        TempBarcodeParameters: record "Barcode Parameters" temporary;
         DidValidationSucceed: Boolean;
         ExpectedErrorText: Text;
 
@@ -55,7 +55,7 @@ codeunit 50155 EAN8Test
     [Test]
     procedure TestEAN8ValidationWithNullString();
     var
-        TempBarcodeParameters: record BarcodeParameters temporary;
+        TempBarcodeParameters: record "Barcode Parameters" temporary;
         DidValidationSucceed: Boolean;
         ExpectedErrorText: Text;
 
@@ -77,7 +77,7 @@ codeunit 50155 EAN8Test
     [Test]
     procedure TestEAN8ValidationWithNormalString();
     var
-        TempBarcodeParameters: record BarcodeParameters temporary;
+        TempBarcodeParameters: record "Barcode Parameters" temporary;
         DidValidationSucceed: Boolean;
         ExpectedResult: Boolean;
         test: Integer;
@@ -104,7 +104,7 @@ codeunit 50155 EAN8Test
     [Test]
     procedure TestEAN8ValidationWithInvalidString();
     var
-        TempBarcodeParameters: record BarcodeParameters temporary;
+        TempBarcodeParameters: record "Barcode Parameters" temporary;
         DidValidationSucceed: Boolean;
         ExpectedErrorText: Text;
 
@@ -127,7 +127,7 @@ codeunit 50155 EAN8Test
     [Test]
     procedure TestEAN8ValidationWithInvalidStringLength();
     var
-        TempBarcodeParameters: record BarcodeParameters temporary;
+        TempBarcodeParameters: record "Barcode Parameters" temporary;
         DidValidationSucceed: Boolean;
         ExpectedErrorText: Text;
 
@@ -147,7 +147,29 @@ codeunit 50155 EAN8Test
 
     end;
 
-    procedure InitializeEncoder(var TempBarcodeParameters: record BarcodeParameters temporary);
+    [Test]
+    procedure TestEAN8ImageEncodingNotImplemented();
+    var
+        TempBarcodeParameters: record "Barcode Parameters" temporary;
+        ImageText: Text;
+        ExpectedErrorText: Text;
+
+    begin
+        // [Scenario] A barcode string needs to be validated for EAN8
+        // [Given] A font encoder initialized for EAN8
+
+        InitializeEncoder(TempBarcodeParameters);
+
+        // [When] An the image encoder is called
+
+        // [Then] The call should raise an error
+        ExpectedErrorText := 'Base64 Image Encoding is currently not implemented for ProviderDefault Provider and Symbology EAN-8';
+        asserterror ImageText := TempBarcodeParameters.EncodeBarcodeImage();
+        Assert.AreEqual(ExpectedErrorText, GetLastErrorText(), 'The operation did not raise the correct error');
+
+    end;
+
+    procedure InitializeEncoder(var TempBarcodeParameters: record "Barcode Parameters" temporary);
     var
 
     begin
